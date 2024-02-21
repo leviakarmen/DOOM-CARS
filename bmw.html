@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bmw.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1 class="text-center"><b>BMW</b></h1>
+        
+        <div class="row">
+            <!-- BMW X1 -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="bmw x1.png" class="card-img-top" alt="BMW X1">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW X1</h5>
+                        <p><strong>Engine Capacity:</strong> 1499 to 1995 cc</p>
+                        <p><strong>Mileage:</strong> 16.35 kmpl</p>
+                        <p><strong>Transmission:</strong> 7-speed dual clutch</p>
+                        <p><strong>Model:</strong> SUV</p>
+                        <p><strong>Price:</strong> ₹52,50,000</p>
+                        <button onclick="addToCart('BMW X1', 5250000)" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMW 7 Series -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="bmw 7 series.png" class="card-img-top" alt="BMW 7 Series">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW 7 Series</h5>
+                        <p><strong>Engine Capacity:</strong> 2993 cc & 2998 cc</p>
+                        <p><strong>Mileage:</strong> 13-17 kmpl</p>
+                        <p><strong>Transmission:</strong> 8 Speed automatic</p>
+                        <p><strong>Model:</strong> Luxury</p>
+                        <p><strong>Price:</strong> ₹1,82,00,000</p>
+                        <button onclick="addToCart('BMW 7 Series', 18200000)" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BMW 3 Series Gran Limousine -->
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="bmw 3 series gran.png" class="card-img-top" alt="BMW 3 Series Gran Limousine">
+                    <div class="card-body">
+                        <h5 class="card-title">BMW 3 Series Gran Limousine</h5>
+                        <p><strong>Engine Capacity:</strong> 1995 cc & 1998 cc</p>
+                        <p><strong>Acceleration:</strong> 6.2 to 7.6 seconds</p>
+                        <p><strong>Top Speed:</strong> 230 to 250 kmph</p>
+                        <p><strong>Model:</strong> Sedan</p>
+                        <p><strong>Price:</strong> ₹60,00,000</p>
+                        <button onclick="addToCart('BMW 3 Series Gran Limousine', 6000000)" class="btn btn-primary">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Shopping Cart -->
+        <center>
+        <div class="card mt-4">
+            <div class="card-body">
+                <h2 class="card-title">Shopping Cart</h2>
+                <ul id="cart-items" class="list-group">
+                </ul>
+                <p>Total: ₹<span id="cart-total">0</span></p>
+                <button onclick="checkout()" class="btn btn-success">Checkout</button>
+                <button onclick="window.open('intex.html')" class="btn btn-secondary">Back</button>
+            </div>
+        </div>
+    </center>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
+        // Your existing JavaScript code here
+        let cartItems = [];
+        let total = 0;
+    
+        function addToCart(itemName, price) {
+            cartItems.push({ name: itemName, price: price });
+            updateCart();
+        }
+    
+        function updateCart() {
+            let cartList = document.getElementById("cart-items");
+            cartList.innerHTML = "";
+            total = 0;
+    
+            cartItems.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = `${item.name} - ₹${formatCurrency(item.price)}`;
+                cartList.appendChild(li);
+                total += item.price;
+            });
+    
+            document.getElementById("cart-total").textContent = formatCurrency(total);
+        }
+    
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+        }
+    
+        function checkout() {
+            alert(`Thank you for your purchase! Total amount: ${formatCurrency(total)}`);
+            cartItems = [];
+            total = 0;
+            updateCart();
+        }
+    </script>
+</body>
+</html>

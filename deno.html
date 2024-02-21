@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMW</title>
+    <link rel="stylesheet" href="bmw.css">
+</head>
+<body>
+    <div class="center">
+        <h1><b>BMW</b></h1>
+        
+        <div class="card" id="bmwX1">
+            <h2>BMW X1</h2>
+            <img src="bmw x1.png" alt="bmx x1">
+            <p><strong>Engine Capacity:</strong> 1499 to 1995 cc</p>
+            <p><strong>Mileage:</strong> 16.35 kmpl</p>
+            <p><strong>Transmission:</strong> 7-speed dual clurtch</p>
+            <p><strong>Model:</strong> suv</p>
+            <p><strong>Price:</strong> ₹52,50,000</p>
+            <button onclick="addToCart('bmw x1', 5250000)">Add to Cart</button>
+        </div>
+
+        <div class="card" id="bmw7Series">
+            <div class="card">
+                <h2>bmw 7 series</h2>
+                <img src="bmw 7 series.png" alt="bmw 7 series"> 
+                <p><strong>Engine Capacity:</strong>2993 cc & 2998 cc </p>
+                <p><strong>Mileage:</strong> 13-17kmpl</p>
+                <p><strong>Transmission:</strong> 8 Speed autoomatic</p>
+                <p><strong>Model:</strong> luxury</p>
+                <p><strong>Price:</strong> ₹1,82,00,000</p>
+                <button onclick="addToCart('Splendor Plus', 18200000)">Add to Cart</button>
+            </div>
+        </div>
+    
+        <div class="card" id="bmw3Series">
+            <div class="card">
+                <h2>bmw 3 series gran limousine</h2>
+                <img src="bmw 3 series gran.png" alt="bmw 3 series gran limousine"> 
+                <p><strong>Engine Capacity:</strong> 1995 cc & 1998 cc </p>
+                <p><strong>Acceleration</strong>6.2 to 7.6 seconds </p>
+                <p><strong>Top Speed:</strong>230 to 250 kmph</p>
+                <p><strong>Model:</strong> sedan</p>
+                <p><strong>Price:</strong> ₹60,00,000</p>
+                <button onclick="addToCart('bmw 3 series gran limousine', 6000000)">Add to Cart</button>
+            </div>
+        </div>
+        
+        <div class="card" id="cart">
+            <div class="card" id="cart">
+                <h2>Shopping Cart</h2>
+                <ul id="cart-items">
+                </ul>
+                <p>Total: ₹<span id="cart-total">0</span></p>
+                <button onclick="checkout()">Checkout</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        let cartItems = [];
+        let total = 0;
+    
+        function addToCart(itemName, price) {
+            cartItems.push({ name: itemName, price: price });
+            updateCart();
+        }
+    
+        function updateCart() {
+            let cartList = document.getElementById("cart-items");
+            cartList.innerHTML = "";
+            total = 0;
+    
+            cartItems.forEach(item => {
+                let li = document.createElement("li");
+                li.textContent = `${item.name} - ₹${formatCurrency(item.price)}`;
+                cartList.appendChild(li);
+                total += item.price;
+            });
+    
+            document.getElementById("cart-total").textContent = formatCurrency(total);
+        }
+    
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(amount);
+        }
+    
+        function checkout() {
+            alert(`Thank you for your purchase! Total amount: ${formatCurrency(total)}`);
+            cartItems = [];
+            total = 0;
+            updateCart();
+        }
+    </script>
+</body>
+</html>
